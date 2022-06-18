@@ -14,7 +14,7 @@ public class TextTemplatesController : ControllerBase
     public TextTemplatesController(IMongoClient client)
     {
         this.client = client;
-        var database = client.GetDatabase("TextTemplate");
+        var database = client.GetDatabase("TextTemplates");
         collection = database.GetCollection<TextTemplate>("Templates");
     }
 
