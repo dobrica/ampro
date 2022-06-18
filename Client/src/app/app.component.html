@@ -57,7 +57,7 @@
       </div>
 
       <div class="uploadSegment">
-        <h3>Upload from file</h3>
+        <h3>Upload template</h3>
         <form [formGroup]="uploadFileForm" (submit)="upload()" id="uploadFileForm" >
           <div class="form-group">
             <input type="file"
@@ -82,6 +82,15 @@
             <label for="messageBody">Text</label>
             <textarea type="text" formControlName="messageBody" id="taMessage" required></textarea>
           </div>
+          <label>{{wordsCount}} </label>
+          <label>words, </label>
+          <label>{{distinctWordsCount}} </label>
+          <label>distinct words, </label>
+          <label>"{{mostFreqWord}}" </label>
+          <label>most frequent word, </label>
+          <label>{{charactersCount}} </label>
+          <label>characters. </label>
+
           <button id="submitMessage" type="submit" class="btn submitBtn">Submit</button>
         </form>
       </div>

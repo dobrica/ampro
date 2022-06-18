@@ -13,6 +13,10 @@ export class AppComponent {
   numberOfChars = 150;
   templatesServiceBaseUrl = "http://172.23.0.6";
   getAllTemplatesEndpoint = "/api/TextTemplates/getall";
+  wordsCount: number = 0;
+  distinctWordsCount: number = 0;
+  mostFreqWord: string = "word";
+  charactersCount: number = 0;
 
   templates: Array<Template> = [];
 

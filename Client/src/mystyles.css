@@ -49,7 +49,7 @@ ul.templates li:active {
 
 #messageForm {
     width: 100%;
-    min-height: 300px;
+    min-height: 320px;
 }
 
 .form-group {
@@ -70,7 +70,7 @@ input {
 
 #taMessage {
     width: 100%;
-    min-height: 175px;
+    min-height: 170px;
 }
 
 .submitBtn {
@@ -91,6 +91,7 @@ input[type=file]::file-selector-button {
     border: 1px solid whitesmoke;
     border-radius: 5px;
     min-height: 30px;
+    margin-top: 10px;
 }
 
 .submitBtn:hover,
