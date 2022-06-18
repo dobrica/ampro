@@ -14,9 +14,6 @@ public class TextStatisticsController : ControllerBase
     [HttpPost("message/stats")]
     public IActionResult AnalyzeText([FromBody] MessageDTO messageDTO)
     {
-        if(messageDTO.Body.Equals(String.Empty))
-            return BadRequest("Message body is empty!");
-
         var messageStats = messageDTO.GetStats();
 
         if (messageStats is not null)

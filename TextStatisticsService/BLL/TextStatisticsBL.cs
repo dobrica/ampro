@@ -8,6 +8,16 @@ public static class TextStatisticsBL
 
     public static MessageStatsDTO GetStats(this MessageDTO messageDTO)
     {
+        if(messageDTO.Body == null || messageDTO.Body.Equals(String.Empty))
+            return new MessageStatsDTO
+            {
+                MessageId = messageDTO.Id,
+                CharactersCount = 0,
+                WordsCount = 0,
+                DistinctWordsCount = 0,
+                MostFreqWord = String.Empty
+            };
+            
         var words = GetListOfWordsInText(messageDTO);
         var distinctWords = GetListOfDistinctWords(words);
 

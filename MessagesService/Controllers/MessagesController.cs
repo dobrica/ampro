@@ -37,6 +37,7 @@ public class MessagesController : ControllerBase
     [HttpPost("add")]
     public IActionResult AddMessage([FromBody] Message message)
     {
+        message.Date = DateTime.UtcNow;
         if (message.Body is not null)
         {
             messageRepository.InsertMessage(message);

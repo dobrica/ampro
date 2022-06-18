@@ -50,7 +50,7 @@
       <div class="templatesSegment">
         <h3>Templates</h3>
         <ul class="templates">
-          <li *ngFor="let temp of templates" (click)="text(temp.body)">
+          <li *ngFor="let temp of templates" (click)="updateTemplate(temp.body)">
             <span>{{temp.body.substring(0, numberOfChars)}} ...</span>
           </li>
         </ul>
@@ -58,11 +58,12 @@
 
       <div class="uploadSegment">
         <h3>Upload template</h3>
-        <form [formGroup]="uploadFileForm" (submit)="upload()" id="uploadFileForm" >
+        <form [formGroup]="uploadFileForm" (change)="upload($event)" id="uploadFileForm" >
           <div class="form-group">
             <input type="file"
                  formControlName="file"
                  id="file"
+                 accept="text/plain"
                  required>
           </div>
         </form>
@@ -80,7 +81,7 @@
                  id="email"
                  required>
             <label for="messageBody">Text</label>
-            <textarea type="text" formControlName="messageBody" id="taMessage" required></textarea>
+            <textarea type="text" formControlName="messageBody" id="taMessage" required (input)="updateStats()"></textarea>
           </div>
           <label>{{wordsCount}} </label>
           <label>words, </label>
