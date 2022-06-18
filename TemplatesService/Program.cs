@@ -1,12 +1,25 @@
 using MongoDB.Driver;
 
+var AllowSpecificOrigins = "AllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .AddEnvironmentVariables()
     .Build();
-    
+
 // Add services to the container.
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("https://localhost:7011",
+                            "http://localhost:4200", "https://172.23.0.6:7011",
+                            "http://172.23.0.2:4200").AllowAnyMethod();
+                      });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(AllowSpecificOrigins);
 
 app.UseAuthorization();
 
