@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    image: "messagesservice"
+    networks:
+      textstatisticsservice_amnetwork:
+        ipv4_address: 172.23.0.4
+networks:
+  textstatisticsservice_amnetwork:
+    external: true

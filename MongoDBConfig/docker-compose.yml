@@ -1,0 +1,13 @@
+services:
+  mongo:
+    image: mongodb2
+    ports:
+      - 27017:27017
+    networks:
+      textstatisticsservice_amnetwork:
+        ipv4_address: 172.23.0.5
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://172.23.0.5:27017/
+networks:
+  textstatisticsservice_amnetwork:
+    external: true

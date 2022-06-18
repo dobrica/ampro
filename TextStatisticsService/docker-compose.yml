@@ -1,0 +1,14 @@
+networks:
+  amnetwork:
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    image: "textstatsservice"
+    networks:
+      amnetwork:
+        ipv4_address: 172.23.0.7
