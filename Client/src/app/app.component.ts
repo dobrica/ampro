@@ -15,10 +15,8 @@ export class AppComponent {
   timeout: any = null;
   numberOfChars = 150;
   templatesServiceBaseUrl = "http://172.23.0.6";
-  // messagesServiceBaseUrl = "http://172.23.0.4";
-  // textStatisticsServiceBaseUrl = "http://172.23.0.7";
-  messagesServiceBaseUrl = "https://localhost:7072";
-  textStatisticsServiceBaseUrl = "https://localhost:7271";
+  messagesServiceBaseUrl = "http://172.23.0.4";
+  textStatisticsServiceBaseUrl = "http://172.23.0.7";
   getAllTemplatesEndpoint = "/api/TextTemplates/getall";
   getMessageStatsEndpoint = "/api/textstatistics/message/stats";
   addNewMessageEndpoint = "/api/messages/add";
@@ -69,7 +67,7 @@ export class AppComponent {
     var request = new AddMessageRequest();
     request.from = this.messageForm.controls.email.value ?? "";
     request.body = this.messageForm.controls.messageBody.value ?? "";
-    this.httpClient.post(this.messagesServiceBaseUrl.concat(this.addNewMessageEndpoint), request, { responseType: 'json' }).subscribe(
+    this.httpClient.post(this.messagesServiceBaseUrl.concat(this.addNewMessageEndpoint), request).subscribe(
       (response: any) => {
         console.log(response);
       });
@@ -96,7 +94,7 @@ export class AppComponent {
     var request = new MessageStatsRequest();
     request.from = this.messageForm.controls.email.value ?? "";
     request.body = this.messageForm.controls.messageBody.value ?? "";
-    this.httpClient.post(this.textStatisticsServiceBaseUrl.concat(this.getMessageStatsEndpoint), request, { responseType: 'json' }).subscribe(
+    this.httpClient.post(this.textStatisticsServiceBaseUrl.concat(this.getMessageStatsEndpoint), request).subscribe(
       (response: any) => {
         this.wordsCount = response.wordsCount;
         this.distinctWordsCount = response.distinctWordsCount;

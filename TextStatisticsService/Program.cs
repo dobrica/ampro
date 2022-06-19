@@ -1,15 +1,13 @@
-var AllowSpecificOrigins = "AllowSpecificOrigins";
+var StatisticsSpecificOrigins = "StatisticsSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowSpecificOrigins,
+    options.AddPolicy(name: StatisticsSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:7271",
-                            "http://localhost:4200", "https://172.23.0.7",
-                            "http://172.23.0.2").AllowAnyMethod().AllowAnyHeader();
+                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                       });
 });
 
@@ -29,7 +27,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(AllowSpecificOrigins);
+app.UseCors(StatisticsSpecificOrigins);
 
 app.UseAuthorization();
 

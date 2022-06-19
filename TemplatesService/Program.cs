@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-var AllowSpecificOrigins = "AllowSpecificOrigins";
+var TemplatesSpecificOrigins = "TemplatesSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = new ConfigurationBuilder()
@@ -12,12 +12,10 @@ var Configuration = new ConfigurationBuilder()
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowSpecificOrigins,
+    options.AddPolicy(name: TemplatesSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:7011",
-                            "http://localhost:4200", "https://172.23.0.6",
-                            "http://172.23.0.2").AllowAnyMethod();
+                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                       });
 });
 
@@ -39,7 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(AllowSpecificOrigins);
+app.UseCors(TemplatesSpecificOrigins);
 
 app.UseAuthorization();
 

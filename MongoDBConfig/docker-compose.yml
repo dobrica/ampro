@@ -1,6 +1,6 @@
 services:
   mongo:
-    image: mongodb2
+    image: mongodb
     ports:
       - 27017:27017
     networks:

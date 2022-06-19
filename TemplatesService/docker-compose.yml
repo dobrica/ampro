@@ -1,5 +1,5 @@
 services:
-  web:
+  web1:
     build: .
     ports:
       - "80:80"

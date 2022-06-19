@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var AllowSpecificOrigins = "AllowSpecificOrigins";
+var MessageSpecificOrigins = "MessageSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -16,12 +16,10 @@ var Configuration = new ConfigurationBuilder()
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowSpecificOrigins,
+    options.AddPolicy(name: MessageSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:7072",
-                            "http://localhost:4200", "https://172.23.0.4",
-                            "http://172.23.0.2").AllowAnyMethod().AllowAnyHeader();
+                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                       });
 });
 
@@ -46,7 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(AllowSpecificOrigins);
+app.UseCors(MessageSpecificOrigins);
 
 app.UseAuthorization();
 
