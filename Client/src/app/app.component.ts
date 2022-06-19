@@ -69,7 +69,7 @@ export class AppComponent {
     request.body = this.messageForm.controls.messageBody.value ?? "";
     this.httpClient.post(this.messagesServiceBaseUrl.concat(this.addNewMessageEndpoint), request).subscribe(
       (response: any) => {
-        console.log(response);
+        alert("Your message was sent successfully!")
       });
   }
 
