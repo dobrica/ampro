@@ -2,7 +2,7 @@
 
 ## Quick deploy  
 
-- Requirements: installed Docker, dotnet, dotnet-ef, ~6GB of available storage
+- Requirements: installed Docker, docker compose, dotnet, dotnet-ef, ~6GB of available storage
 - Steps:
     1. clone this repo
     2. cd to main repo dir
