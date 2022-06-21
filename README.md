@@ -9,7 +9,7 @@
     3. Deploy
     Linux:
     ```
-    ./deploy.sh
+    sudo ./deploy.sh
     ```
     
     4. Test
@@ -22,5 +22,5 @@
     5. Cleanup
     Linux:
     ```
-    ./cleanup.sh
+    sudo ./cleanup.sh
     ```

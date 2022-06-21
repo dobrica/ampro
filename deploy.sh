@@ -29,7 +29,7 @@ cd MessagesService
 sudo docker build -t messagesservice .
 sudo docker compose run -d --name messagesservice web2
 # InitDB
-dotnet ef database update
+sudo dotnet ef database update
 cd ..
 
 sudo docker image rm $(docker images -f "dangling=true" -q)
