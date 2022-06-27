@@ -5,7 +5,7 @@ networks:
         - subnet: 172.23.0.0/24
 services:
   ampostgresdb:
-    image: postgres
+    image: postgresdb
     ports:
       - 5432:5432
     environment:

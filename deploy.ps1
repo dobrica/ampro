@@ -3,6 +3,11 @@ cd MongoDBConfig
 docker build -t mongodb .
 cd ..
 
+# PostgresDB - Messages
+cd PostgresSQLConfig
+docker build -t postgresdb .
+cd ..
+
 # Build client image
 cd Client
 docker build -t amcapp .
@@ -13,13 +18,8 @@ docker compose -f docker-compose.networkanddb.yml up -d
 # Compose services
 docker compose up -d
 
-# MessagesService
-cd MessagesService
-# Init MessageDB
-# export PATH=$PATH:/$HOME/.dotnet/tools
-dotnet ef --version
-dotnet ef database update
-cd ..
+# Init MessagesDB
+docker exec -d ampro-ampostgresdb-1 psql -U postgres -d ttemplates -f init.sql
 
 # Init TemplateDB
 docker exec -it ampro-ammongodb-1 mongoimport --db=TextTemplates --collection=Templates --type=csv --headerline --file=/templates.csv
