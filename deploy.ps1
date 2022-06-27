@@ -1,8 +1,6 @@
-#!/bin/bash
-
 # MongoDB - Templates
 cd MongoDBConfig
-sudo docker build -t mongodb .
+docker build -t mongodb .
 cd ..
 
 # Build client image
@@ -18,11 +16,10 @@ docker compose up -d
 # MessagesService
 cd MessagesService
 # Init MessageDB
-export PATH=$PATH:/$HOME/.dotnet/tools
+# export PATH=$PATH:/$HOME/.dotnet/tools
 dotnet ef --version
 dotnet ef database update
 cd ..
 
 # Init TemplateDB
-docker exec -d ampro-ammongodb-1 chmod u+x ./startup.sh
-docker exec -d ampro-ammongodb-1 ./startup.sh
+docker exec -it ampro-ammongodb-1 mongoimport --db=TextTemplates --collection=Templates --type=csv --headerline --file=/templates.csv
