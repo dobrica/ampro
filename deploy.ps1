@@ -4,7 +4,7 @@ docker build -t mongodb .
 cd ..
 
 # PostgresDB - Messages
-cd PostgresSQLConfig
+cd PostgreSQLConfig
 docker build -t postgresdb .
 cd ..
 
