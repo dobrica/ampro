@@ -1,53 +1,33 @@
 #!/bin/bash
 
-# TextStatisticsService
-cd TextStatisticsService
-sudo docker build -t statisticsservice .
-sudo docker compose run -d --name statisticsservice web
-cd ..
-
-sudo docker image rm $(sudo docker images -f "dangling=true" -q)
-
-# PostgreSQL - MessageDB
-cd PostgreSQLConfig
-sudo docker compose run -d --name postgresqldb db
-cd ..
-
-sudo docker image rm $(sudo docker images -f "dangling=true" -q)
-
-# MongoDB - TemplatesDB
+# MongoDB - Templates
 cd MongoDBConfig
 sudo docker build -t mongodb .
-sudo docker compose run -d --name mongodb mongo
-sudo docker exec -d mongodb ./startup.sh
 cd ..
 
-sudo docker image rm $(sudo docker images -f "dangling=true" -q)
+# PostgresDB - Messages
+cd PostgreSQLConfig
+sudo docker compose run -d --name postgresqldb ampostgresdb
+cd ..
+
+# Build client image
+cd Client
+docker build -t amcapp .
+cd ..
+
+# Compose network, template and message db
+docker compose -f docker-compose.networkanddb.yml up -d
+# Compose services
+docker compose up -d
 
 # MessagesService
 cd MessagesService
-# InitDB
+# Init MessageDB
 export PATH=$PATH:/$HOME/.dotnet/tools
 dotnet ef --version
 dotnet ef database update
-sudo docker build -t messagesservice .
-sudo docker compose run -d --name messagesservice web2
 cd ..
 
-sudo docker image rm $(sudo docker images -f "dangling=true" -q)
-
-# TemplatesService
-cd TemplatesService
-sudo docker build -t templatesservice .
-sudo docker compose run -d --name templatesservice web1
-cd ..
-
-sudo docker image rm $(sudo docker images -f "dangling=true" -q)
-
-# Angular - Client
-cd Client
-sudo docker build -t amcapp .
-sudo docker compose run -d --name amcapp app
-cd ..
-
-sudo docker image rm $(sudo docker images -f "dangling=true" -q)
+# Init TemplateDB
+docker exec -d ampro-ammongodb-1 chmod u+x ./startup.sh
+docker exec -d ampro-ammongodb-1 ./startup.sh

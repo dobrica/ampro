@@ -4,7 +4,7 @@ using TextStatisticsService.BLL;
 namespace TextStatisticsService.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 public class TextStatisticsController : ControllerBase
 {
     public TextStatisticsController()

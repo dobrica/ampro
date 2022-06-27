@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MessagesService.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 public class MessagesController : ControllerBase
 {
     private IMessageRepository messageRepository;

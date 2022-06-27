@@ -1,10 +1,13 @@
 #!/bin/bash
-sudo docker stop amcapp templatesservice messagesservice mongodb postgresqldb statisticsservice
 
-sudo docker rm amcapp templatesservice messagesservice mongodb postgresqldb statisticsservice
+docker stop $(docker ps -a -q --filter="name=ampro-*")
 
-sudo docker image rm amcapp templatesservice messagesservice mongodb postgresqldb statisticsservice 
+docker rm $(docker ps -a -q --filter="name=ampro-*")
+
+docker rmi  $(docker images -f "dangling=true" -q)
+
+docker rmi ampro_nginx messagesservice statisticsservice templatesservice mongodb amcapp
+
+docker network rm ampro_amntwrk
 
 sudo docker image rm node mcr.microsoft.com/dotnet/sdk:6.0 mcr.microsoft.com/dotnet/aspnet:6.0 mongo postgres nginx
-
-sudo docker image rm  $(sudo docker images -f "dangling=true" -q)

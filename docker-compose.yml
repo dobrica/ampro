@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  statisticsservice:
+    build:
+      context: ./TextStatisticsService
+    networks:
+      - ampro_amntwrk
+    ports:
+      - "3500:3500"
+    environment:
+      - ASPNETCORE_URLS=http://+:3500
+      - ASPNETCORE_ENVIRONMENT=Development
+    image: "statisticsservice"
+  messagesservice:
+    build:
+      context: ./MessagesService
+    networks:
+      - ampro_amntwrk
+    ports:
+      - "3600:3600"
+    environment:
+      - ASPNETCORE_URLS=http://+:3600
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DEFAULT_CONNECTION=Server=172.23.0.3; port=5432; user id = postgres; password = postgres; database=ttemplates; pooling = true
+    image: "messagesservice"
+  templatesservice:
+    build: 
+      context: ./TemplatesService
+    networks:
+      - ampro_amntwrk
+    ports:
+      - "3700:3700"
+    environment:
+      - ASPNETCORE_URLS=http://+:3700
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DEFAULT_CONNECTION=mongodb://172.23.0.5:27017/
+    image: "templatesservice"
+  amcapp:
+    build: 
+      context: ./Client
+    networks:
+      - ampro_amntwrk
+    ports:
+      - 80:80
+    image: "amcapp"
+  nginx:
+    build: 
+      context: ./NginxConfig
+    networks:
+      - ampro_amntwrk
+    ports:
+      - "3000:80"
+networks:
+  ampro_amntwrk:
+    external: true

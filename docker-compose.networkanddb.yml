@@ -1,0 +1,26 @@
+networks:
+  amntwrk:
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
+services:
+  ampostgresdb:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ttemplates
+    networks:
+      amntwrk:
+        ipv4_address: 172.23.0.3
+  ammongodb:
+    image: mongodb
+    ports:
+      - 27017:27017
+    networks:
+      amntwrk:
+        ipv4_address: 172.23.0.5
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://172.23.0.5:27017/

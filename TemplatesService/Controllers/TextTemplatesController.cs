@@ -5,7 +5,7 @@ using MongoDB.Driver;
 namespace TemplateService.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 public class TextTemplatesController : ControllerBase
 {
     private IMongoClient client;

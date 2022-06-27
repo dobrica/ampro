@@ -8,7 +8,7 @@
     2. cd <main_repo_dir>
     3. Deploy
     ```
-    sudo ./deploy.sh
+    ./deploy.sh
     ```
     
     4. Test
@@ -16,9 +16,9 @@
     ```
     sudo docker ps -a
     ```
-    - client app is on http://172.23.0.2
+    - client app is on http://localhost or http://localhost:3000/ampro
 
     5. Cleanup
     ```
-    sudo ./cleanup.sh
+    ./cleanup.sh
     ```
