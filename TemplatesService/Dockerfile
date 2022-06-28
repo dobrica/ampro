@@ -3,10 +3,10 @@ WORKDIR /TemplatesService
 
 EXPOSE 3700
 ENV ASPNETCORE_URLS=http://+:3700
+ENV ASPNETCORE_ENVIRONMENT=Development
 
 # Copy everything
 COPY . ./
-COPY ./bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger* ./
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
